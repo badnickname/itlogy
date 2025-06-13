@@ -1,0 +1,122 @@
+<header>
+  <div>
+    <div class="logo">
+      <img src="images/pizza.png" alt="logo" />
+      <h1>PIZZA CHEFF</h1>
+    </div>
+    <nav class="menu" [class.menu--opened]="isMenuVisible">
+      <li>Пиццы</li>
+      <li>Напитки</li>
+      <li>Доставка и оплата</li>
+      <li>Контакты</li>
+    </nav>
+    <div class="menu__item" [class.menu__item--opened]="isMenuVisible">
+      <button (click)="isMenuVisible = false">X</button>
+    </div>
+    <div class="menu__item menu__item--button" [class.menu__item--opened]="!isMenuVisible">
+      <button (click)="isMenuVisible = true">
+        <svg style="margin-top: 4px" height="12px" viewBox="0 0 16 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+          <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+          <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="main">
+    <section class="preview">
+      <div>
+        <h1 class="header">Самая вкусная пицца в мире</h1>
+        <h1 class="header header--accent">только в Pizza Cheff</h1>
+        <ul class="grid">
+          <li>
+            <img src="images/1.png" alt="1" />
+            <div>
+              <h3>Лучшее тесто</h3>
+              <p>Мы создаем тесто только из отборной итальянской муки наивысшего качества</p>
+            </div>
+          </li>
+          <li>
+            <img src="images/2.png" alt="2" />
+            <div>
+              <h3>Лучшие повара</h3>
+              <p>Пиццы готовят самые профессиональные итальянские повара</p>
+            </div>
+          </li>
+          <li>
+            <img src="images/3.png" alt="1" />
+            <div>
+              <h3>Гарантия качества</h3>
+              <p>Наша пиццерия получила множество наград и признаний по всему миру</p>
+            </div>
+          </li>
+          <li>
+            <img src="images/4.png" alt="4" />
+            <div>
+              <h3>Отборные рецепты</h3>
+              <p>Мы используем рецепты от мировых лидеров в изготовлении пиццы</p>
+            </div>
+          </li>
+        </ul>
+        <a href="#select">
+          <button>Выбрать пиццу</button>
+        </a>
+      </div>
+      <img src="images/verybigpizza.png" alt="pizza" />
+    </section>
+  </div>
+  <div class="main">
+    <section class="select">
+      <h1 id="select">Выберите свою любимую пиццу</h1>
+      <menu>
+        @for (pizza of pizzas; track pizza.url) {
+          <li>
+            <img [src]="pizza.url" alt="pizza" (click)="openImage(pizza.url)" />
+            <h3>{{ pizza.name }}</h3>
+            <p>{{ pizza.description }}</p>
+            <a href="#form">
+              <button>В корзину</button>
+            </a>
+          </li>
+        }
+      </menu>
+    </section>
+  </div>
+  <div class="main">
+    <section class="form">
+      <div>
+        <h1 id="form" class="header header--accent">Хватит думать!</h1>
+        <h1 class="header">Доставим заказ за 30 минут!</h1>
+        <p>
+          Мы  гарантированно доставим вашу пиццу за 30 минут с момента оформления заказа. Если мы опоздаем даже на 1 минуту - вы получаете весь заказ бесплатно и ваучер на скидку на следующий заказ. Мы гордимся нашим сервисом и сделаем всё, чтобы наш клиент был доволен и не остался голодный!
+        </p>
+      </div>
+      <form [formGroup]="form" (submit)="send()">
+        <input type="text" formControlName="name" (keydown.dot)="$event.preventDefault()" (paste)="omitPoint($event)" placeholder="Ваше имя" autocomplete="off" />
+        <input type="text" formControlName="address" (keydown.dot)="$event.preventDefault()" (paste)="omitPoint($event)" placeholder="Адрес доставки" autocomplete="off" />
+        <input type="text" formControlName="phone" (keydown.dot)="$event.preventDefault()" (paste)="omitPoint($event)" placeholder="Телефон" autocomplete="off" />
+        <input type="submit" [disabled]="form.invalid" value="Оформить заказ" />
+      </form>
+      <img src="images/pizzzzza.jpg" alt="pizza" />
+    </section>
+  </div>
+</main>
+
+@if (popup.visible) {
+  <div class="modal" (click)="popup.visible = false">
+    @if (popup.text) {
+      <div>
+        {{ popup.text }}
+      </div>
+    }
+    @if (popup.url) {
+      <img [src]="popup.url" alt="image" />
+    }
+    <div class="modal__close">
+      <button>X</button>
+    </div>
+  </div>
+}
+
