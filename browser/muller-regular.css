@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Muller';
+  font-weight: normal;
+	src: url('./fonts/muller-regular.eot'); /* IE 9 Compatibility Mode */
+	src: url('./fonts/muller-regular.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
+		url('./fonts/muller-regular.woff2') format('woff2'), /* Super Modern Browsers */
+		url('./fonts/muller-regular.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
+		url('./fonts/muller-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+		url('./fonts/muller-regular.svg#muller-regular') format('svg'); /* Chrome < 4, Legacy iOS */
+}
